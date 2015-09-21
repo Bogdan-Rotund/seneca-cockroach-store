@@ -28,9 +28,9 @@ module.exports = function(options) {
 
   function configure(spec,cb) {
 
-    var dbOpts = seneca.util.deepextend({
-      uri:"http://localhost:8080",
-    },spec.options);
+    var dbOpts = seneca.util.deepextend(
+      {uri:"https://localhost:8080" },
+      spec.options);
 
     dbinst = new roach(dbOpts);
 
@@ -291,7 +291,7 @@ module.exports = function(options) {
       fs.readFile(args.file,function(err,entjson){
         if( entjson ) {
           try {
-            entmap = JSON.parse(entjson);
+            var entmap = JSON.parse(entjson);
             done(err,{ok:!!err});
           }
           catch(e){
